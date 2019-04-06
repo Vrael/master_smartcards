@@ -1,0 +1,51 @@
+//
+//*********LECTOR LTC31************
+//
+//
+//
+//PROGRAMA QUE MUESTRA COMO SE ESCRIBE EN MEMORIA
+//EN UNA ZONA DE MEMORIA DE LA TARJETA SLE-5542
+//A PARTIR DE LA POSICI�N 0X ESCRIBE 0Y OCTETOS
+//MUESTRA EN PANTALLA EL CONTENIDO
+/* ESCRIBE EN MEMORIA
+*  PRESENTA EL PIN PARA
+*  PODER ESCRIBIR EN LA TARJETA 
+*  EL PIN ES FFFFFF
+*/
+card = new Card();
+//atr = card.reset(Card.RESET_COLD);
+//print(atr);
+//
+//**SE FORMA LA APDU CONCATENADO PARA ENVIARLA
+//PRIMERA PARTE DE LA APDU
+clainsp1p2lg = new ByteString("0020000003", HEX);
+//
+//***LA SEGUNDA PARTE DE LA APDU ES EL PIN
+PIN = new ByteString("FFFFFF", HEX);
+//SE CONCATENA LA PRIMERA PARTE CON EL PIN PARA FORMA LA APDU COMPLETA
+apdu = clainsp1p2lg.concat(PIN);
+print(apdu);
+print();
+//SE ENVIA A LA TARJETA
+resp = card.plainApdu(apdu);
+//print(resp);
+//SI RESPONDE 9000 ES PIN ES VALIDO
+//SI RESPONDE 63CX DONDE X ES EL NUMERO DE INTENTOS DISPONIBLES
+//SI C0 --> TARJETA BLOQUEADA
+//print("C�digo SW: " + card.SW.toString(16));
+//
+//SE VAN A ESCRIBIR 16 OCTETOS A PARTIR DE LA POSICION 0X10
+//SE ESCRIBEN CON sendApdu
+//
+DATA = new ByteString("DD DC DF 01 DD DC DF 02 DD DC DF 03 DD DC DF 04", HEX);
+//atentos no hace falta el segundo par�metro (Lc)
+resp = card.sendApdu(0x00, 0xD6, 0x00, 0x10, DATA);
+//
+print("C�digo SW: " + card.SW.toString(16));
+print();
+
+
+
+
+
+
