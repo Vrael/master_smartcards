@@ -1,7 +1,10 @@
 //
 //*********LECTOR LTC31************
 //
-// PROGRAMA CONSUMICION CAFETERIA
+// 4.- Consumición en cafetería
+// Autores: 
+// 	Marc Aguilar de Llorens
+//	Francisco Burgos Valdés
 //
 
 card = new Card();
@@ -20,8 +23,9 @@ print();
 // Importe consumicion
 consumicion = 10;
 i = 0;
+//*** Se simulan varias compras consecutivas de 10 euros
 do {
-	//***Leer la posición CO de memoria 1 byte. Donde está guardada la información del saldo
+	//*** Lee la posición C0 de memoria 1 byte. Donde está guardada la información del saldo
 	resp = card.plainApdu(new ByteString("00 B0 00 C0 01", HEX));
 	saldo = parseInt(resp.toString(16), 16);
 	print(resp);
@@ -49,7 +53,7 @@ do {
 		print("Código SW: " + card.SW.toString(16));
 		print();
 		
-		//*** Actualiza el saldo de la tarjeta a 20€ 
+		//*** Actualiza el saldo de la tarjeta
 		resp = card.plainApdu(new ByteString("00 D6 00 C0 01 " + formated2HexDigits, HEX));
 		print(resp);
 		print("Código SW: " + card.SW.toString(16));

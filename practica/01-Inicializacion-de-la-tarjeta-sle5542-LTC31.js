@@ -1,9 +1,11 @@
 //
 //*********LECTOR LTC31************
 //
+// 1.- Inicialización de la tarjeta.
+// Autores: 
+// 	Marc Aguilar de Llorens
+//	Francisco Burgos Valdés
 //
-// SE INICIALIZA LA TARJETA CON LOS DATOS DEL USUARIO AL QUE SE LE VA A ENTREGAR
-// SALDO DE 30€
 
 card = new Card();
 atr = card.reset(Card.RESET_COLD);
@@ -11,7 +13,6 @@ print(atr);
 print();
 
 //***Lee mapa memoria completo poniendo 00 en el parámetro P3
-//
 resp = card.plainApdu(new ByteString("00 B0 00 00 00", HEX));
 print(resp);
 print("Código SW: " + card.SW.toString(16));
@@ -54,7 +55,7 @@ print(resp);
 print("Código SW: " + card.SW.toString(16));
 print();
 
-//*** Inicializa el histórico de accesos a 0.
+//*** Inicializa el histórico de accesos a FF.
 resp = card.plainApdu(new ByteString("00 D6 00 A0 10 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF", HEX));
 print(resp);
 print("Código SW: " + card.SW.toString(16));

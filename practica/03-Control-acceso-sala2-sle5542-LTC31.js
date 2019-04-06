@@ -1,9 +1,11 @@
 //
 //*********LECTOR LTC31************
-// PROGRAMA DE ACCESO A LA SALA 2
 //
+// 3.- Control de acceso a la Sala2
+// Autores: 
+// 	Marc Aguilar de Llorens
+//	Francisco Burgos Valdés
 //
-
 
 card = new Card();
 atr = card.reset(Card.RESET_COLD);
@@ -22,7 +24,7 @@ print(resp);
 print("Código SW: " + card.SW.toString(16));
 print();
 
-//***Leer la posición 90 de memoria 1 byte. Donde está guardada la información de acceso
+//***Lee la posición 90 de memoria 1 byte. Donde está guardada la información de acceso
 resp = card.plainApdu(new ByteString("00 B0 00 90 01", HEX));
 print(resp);
 print("Código SW: " + card.SW.toString(16));
@@ -69,7 +71,7 @@ if(resp == "02") {
 } else {
 	print("Acceso denegado.\n Su nivel de acceso es " + resp + " y necesita un nivel 2 para entrar.")
 	
-	// Leer contador de fallos de sala 2
+	// Lee contador de fallos de la sala 2
 	resp = card.plainApdu(new ByteString("00 B0 00 D0 01", HEX));
 	print(resp);
 	print("Código SW: " + card.SW.toString(16));
