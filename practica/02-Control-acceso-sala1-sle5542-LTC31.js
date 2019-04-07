@@ -4,7 +4,7 @@
 // 2.- Control de acceso a la Sala1
 // Autores: 
 // 	Marc Aguilar de Llorens
-//	Francisco Burgos ValdÈs
+//	Francisco Burgos Vald√©s
 //
 
 card = new Card();
@@ -12,13 +12,13 @@ atr = card.reset(Card.RESET_COLD);
 print(atr);
 print();
 
-//***Lee mapa memoria completo poniendo 00 en el par·metro P3
+//***Lee mapa memoria completo poniendo 00 en el par√°metro P3
 resp = card.plainApdu(new ByteString("00 B0 00 00 00", HEX));
 print(resp);
-print("CÛdigo SW: " + card.SW.toString(16));
+print("C√≥digo SW: " + card.SW.toString(16));
 print();
 
-//***Lee la posiciÛn 90 de memoria 1 byte. Donde est· guardada la informaciÛn de acceso
+//***Lee la posicion 90 de memoria 1 byte. Donde est√° guardada la informaci√≥n de acceso
 resp = card.plainApdu(new ByteString("00 B0 00 90 01", HEX));
 print(resp);
 if(resp == "01" || resp == "02") {

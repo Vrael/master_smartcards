@@ -4,7 +4,7 @@
 // 3.- Control de acceso a la Sala2
 // Autores: 
 // 	Marc Aguilar de Llorens
-//	Francisco Burgos Vald�s
+//	Francisco Burgos Valdés
 //
 
 card = new Card();
@@ -15,19 +15,19 @@ print();
 //*** Lee mapa memoria completo poniendo 00 en el par�metro P3
 resp = card.plainApdu(new ByteString("00 B0 00 00 00", HEX));
 print(resp);
-print("C�digo SW: " + card.SW.toString(16));
+print("Codigo SW: " + card.SW.toString(16));
 print();
 
 //*** Presenta el PIN de la tarjeta para poder escribir
 resp = card.plainApdu(new ByteString("00 20 00 00 03 FF FF FF", HEX));
 print(resp);
-print("C�digo SW: " + card.SW.toString(16));
+print("Codigo SW: " + card.SW.toString(16));
 print();
 
 //***Lee la posici�n 90 de memoria 1 byte. Donde est� guardada la informaci�n de acceso
 resp = card.plainApdu(new ByteString("00 B0 00 90 01", HEX));
 print(resp);
-print("C�digo SW: " + card.SW.toString(16));
+print("Codigo SW: " + card.SW.toString(16));
 print();
 
 if(resp == "02") {
@@ -36,7 +36,7 @@ if(resp == "02") {
 	// Leer contador de accesos
 	resp = card.plainApdu(new ByteString("00 B0 00 D1 01", HEX));
 	print(resp);
-	print("C�digo SW: " + card.SW.toString(16));
+	print("Codigo SW: " + card.SW.toString(16));
 	print();
 	
 	firstPosition = new ByteString("A0", HEX);
@@ -49,7 +49,7 @@ if(resp == "02") {
 	print("Son las 8:00 AM. Registrando entrada");
 	resp = card.plainApdu(new ByteString("00 D6 00 " + formated2Hex + " 01 08", HEX));
 	print(resp);
-	print("C�digo SW: " + card.SW.toString(16));
+	print("Codigo SW: " + card.SW.toString(16));
 	print();
 	
 	// Escribir incremento en el contador de accesos correctos
@@ -62,7 +62,7 @@ if(resp == "02") {
 	formated2hexDigits = getHexValue(countAccess);
 	resp = card.plainApdu(new ByteString("00 D6 00 D1 01 " + formated2HexDigits, HEX));
 	print(resp);
-	print("C�digo SW: " + card.SW.toString(16));
+	print("Codigo SW: " + card.SW.toString(16));
 	print();
 		
 } else {
@@ -71,11 +71,11 @@ if(resp == "02") {
 	// Lee contador de fallos de la sala 2
 	resp = card.plainApdu(new ByteString("00 B0 00 D0 01", HEX));
 	print(resp);
-	print("C�digo SW: " + card.SW.toString(16));
+	print("Codigo SW: " + card.SW.toString(16));
 	print();
 	
 	if(resp == "FF") {
-		print("N�mero m�ximo de intentos de acceso incorrectos alcanzado.")
+		print("Numero maximo de intentos de acceso incorrectos alcanzado.")
 	} else {
 		failCountAccess = parseInt(resp.toString(HEX),16);
 		
@@ -89,11 +89,11 @@ if(resp == "02") {
 		// Escribe el contador en la tarjeta
 		resp = card.plainApdu(new ByteString("00 D6 00 D0 01 " + formated2HexDigits, HEX));
 		print(resp);
-		print("C�digo SW: " + card.SW.toString(16));
+		print("Codigo SW: " + card.SW.toString(16));
 		print();
 		
 		if(failCountAccess > 5) {
-			print("Se env�a un mensaje de alerta al operador.");
+			print("Se envia un mensaje de alerta al operador.");
 			print();
 		}
 	}
@@ -102,7 +102,7 @@ if(resp == "02") {
 //*** Lee mapa memoria completo poniendo 00 en el par�metro P3
 resp = card.plainApdu(new ByteString("00 B0 00 00 00", HEX));
 print(resp);
-print("C�digo SW: " + card.SW.toString(16));
+print("Codigo SW: " + card.SW.toString(16));
 print();
 
 
